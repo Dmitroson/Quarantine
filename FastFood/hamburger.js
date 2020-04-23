@@ -76,6 +76,11 @@ class Hamburger{
     }
 
     addTopping(topping){
+        if(!Hamburger.TOPPINGS[topping]){
+            console.log(`HamburgerException: INVALID TOPPING '${topping}'`);
+            return;
+        }
+
         if(!this._toppings.includes(topping)){
             this._toppings.push(topping);
         }
@@ -123,7 +128,9 @@ console.log("Price: %f", hamburger.calculatePrice());
 hamburger.addTopping(Hamburger.TOPPING_SAUCE);
 // А сколько теперь стоит?
 console.log("Price with sauce: %f", hamburger.calculatePrice());
+hamburger.removeTopping(Hamburger.TOPPING_SAUCE);
 
+console.log("Price: %f", hamburger.calculatePrice());
 
 
 // не передали обязательные параметры
@@ -138,3 +145,5 @@ let h4 = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
 hamburger.addTopping(Hamburger.TOPPING_MAYO);
 hamburger.addTopping(Hamburger.TOPPING_MAYO);
 // HamburgerException: duplicate topping 'TOPPING_MAYO'
+hamburger.addTopping(Hamburger.STUFFING_SALAD);
+// HamburgerException: INVALID TOPPING 'STUFFING_SALAD'
